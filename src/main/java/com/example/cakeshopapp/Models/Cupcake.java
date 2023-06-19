@@ -9,17 +9,21 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Cupcake {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cupcake_id", nullable = false)
     private Long id;
     private String name;
     private String description;
     @OneToMany
-    private List<Flavors> flavors;
+    private List<Flavor> flavors;
     private int priceFor10Servings;
 
+    public Cupcake(String name, String description, List<Flavor> flavors, int priceFor10Servings) {
+        this.name = name;
+        this.description = description;
+        this.flavors = flavors;
+        this.priceFor10Servings = priceFor10Servings;
+    }
 }

@@ -11,8 +11,6 @@ import java.util.logging.Filter;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Cake {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,7 +19,13 @@ public class Cake {
     private String name;
     private String description;
     @OneToMany
-    private List<Flavors> flavors;
+    private List<Flavor> flavors;
     private int priceFor10Servings;
 
+    public Cake(String name, String description, List<Flavor> flavors, int priceFor10Servings) {
+        this.name = name;
+        this.description = description;
+        this.flavors = flavors;
+        this.priceFor10Servings = priceFor10Servings;
+    }
 }
