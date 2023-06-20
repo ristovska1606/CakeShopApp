@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -23,4 +21,13 @@ public class User {
     @OneToOne
     private Cart cart;
 
+    public User(String firstName, String lastName, String email, String password, String confirmPassword, String phoneNumber, Cart cart) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.phoneNumber = phoneNumber;
+        this.cart = cart;
+    }
 }
