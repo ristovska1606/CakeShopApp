@@ -12,8 +12,6 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +37,8 @@ public class Cart {
         this.products = new ArrayList<>();
         this.status = CartStatus.CREATED;
     }
+
+
 
 
 }

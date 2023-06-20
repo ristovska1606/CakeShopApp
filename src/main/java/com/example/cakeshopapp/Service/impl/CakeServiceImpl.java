@@ -7,10 +7,8 @@ import com.example.cakeshopapp.Repository.CakeRepository;
 import com.example.cakeshopapp.Service.CakeService;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CakeServiceImpl implements CakeService {
@@ -20,6 +18,7 @@ public class CakeServiceImpl implements CakeService {
     public CakeServiceImpl(CakeRepository cakeRepository) {
         this.cakeRepository = cakeRepository;
     }
+
 
     @Override
     public Cake create(String name, String description, String flavors, int price) {

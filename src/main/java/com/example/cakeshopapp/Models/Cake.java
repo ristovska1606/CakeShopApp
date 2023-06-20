@@ -13,7 +13,7 @@ import java.util.logging.Filter;
 @Data
 public class Cake {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cake_id", nullable = false)
     private Long cake_id;
     private String name;
@@ -27,5 +27,9 @@ public class Cake {
         this.description = description;
         this.flavors = flavors;
         this.priceFor10Servings = priceFor10Servings;
+    }
+
+    public Cake() {
+
     }
 }
