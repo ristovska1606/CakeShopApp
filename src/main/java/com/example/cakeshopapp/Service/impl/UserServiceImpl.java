@@ -2,6 +2,8 @@ package com.example.cakeshopapp.Service.impl;
 
 import com.example.cakeshopapp.Models.Cart;
 import com.example.cakeshopapp.Models.User;
+import com.example.cakeshopapp.Models.exceptions.InvalidArgumentsException;
+import com.example.cakeshopapp.Models.exceptions.InvalidUserCredentialsException;
 import com.example.cakeshopapp.Models.exceptions.UserNotFoundException;
 import com.example.cakeshopapp.Repository.UserRepository;
 import com.example.cakeshopapp.Service.UserService;
@@ -26,4 +28,14 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) {
         return this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
+
+    @Override
+    public User login(String email, String password) {
+        if (email==null || email.isEmpty() || password==null || password.isEmpty()) {
+            throw new InvalidArgumentsException();
+        }
+        return userRepository.findByEmailAndPassword(email,
+                password).orElseThrow(InvalidUserCredentialsException::new);
+    }
+
 }
