@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Flavor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +23,9 @@ public class Flavor {
 
     public Flavor(String name) {
         this.name = name;
+    }
+
+    public Flavor() {
+
     }
 }

@@ -37,8 +37,8 @@ public class LoginController {
             return "redirect:/home";
         }
         catch (InvalidUserCredentialsException exception) {
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", exception.getMessage());
+            model.addAttribute("hasErrors", true);
+            model.addAttribute("errors", exception.getMessage());
             return "login";
         }
     }

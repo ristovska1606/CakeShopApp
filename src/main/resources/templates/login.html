@@ -23,7 +23,7 @@
             <!-- First column -->
             <div class="col-lg-6">
                 <li class="btn btn-light border rounded m-2">
-                    <a class="nav-link" href="/welcomePage">Back</a>
+                    <a class="nav-link" href="/">Back</a>
                 </li>
                 <div class="d-flex align-items-center" style=" min-height: 86.8vh;">
                     <img class="logo" src="../../images/cakeShop_logo.png">
@@ -36,8 +36,10 @@
             <div class="col-lg-6" style="background-color: #F7E1F8">
                 <div class="px-5 pt-5 ">
                     <h4 class="d-flex justify-content-center">Login:</h4>
-
-                    <form class="mt-5 p-4" method="post" action="/register">
+                    <div th:if="${hasErrors}" class="error text-danger">
+                        <div th:text="${errors}"></div>
+                    </div>
+                    <form class="mt-5 p-4" method="post" action="/login">
                         <div class="form-row">
                             <div class="col-lg-12">
                                 <label for="email">Email</label>

@@ -26,4 +26,8 @@ public class Cupcake {
         this.flavors = flavors;
         this.priceFor10Servings = priceFor10Servings;
     }
+
+    public Cupcake() {
+
+    }
 }
