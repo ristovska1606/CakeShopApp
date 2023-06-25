@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CupcakeRepository extends JpaRepository<Cupcake, Long> {
+    Cupcake findByName(String name);
 }
 

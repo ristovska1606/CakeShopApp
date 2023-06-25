@@ -4,20 +4,20 @@ import com.example.cakeshopapp.Models.Flavor;
 import com.example.cakeshopapp.Models.exceptions.ProductDoesntExist;
 //import com.example.cakeshopapp.Repository.CakeRepository;
 import com.example.cakeshopapp.Repository.CupcakeRepository;
-import com.example.cakeshopapp.Service.CakeService;
+import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.CupcakeService;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CupcakeServiceImpl implements CupcakeService {
     private final CupcakeRepository cupcakeRepository;
-    public CupcakeServiceImpl(CupcakeRepository cupcakeRepository) {
+    private final FlavorsRepository flavorsRepository;
+    public CupcakeServiceImpl(CupcakeRepository cupcakeRepository, FlavorsRepository flavorsRepository) {
         this.cupcakeRepository = cupcakeRepository;
+        this.flavorsRepository = flavorsRepository;
     }
 
 
@@ -25,8 +25,14 @@ public class CupcakeServiceImpl implements CupcakeService {
 
     @Override
     public Cupcake create(String name, String description, String flavors, int price) {
+        if(cupcakeRepository.findByName(name) != null)
+        {
+            this.flavorsRepository.deleteAll(this.cupcakeRepository.findByName(name).getFlavors());
+            this.cupcakeRepository.delete(cupcakeRepository.findByName(name));
+        }
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
-        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
+        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).toList();
+        this.flavorsRepository.saveAll(flavors1);
         Cupcake cupcake = new Cupcake(name, description, flavors1, price);
         return this.cupcakeRepository.save(cupcake);
     }
@@ -35,6 +41,7 @@ public class CupcakeServiceImpl implements CupcakeService {
     public Cupcake edit(Long id, String name, String description, String flavors, int price) {
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
         List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
+        this.flavorsRepository.saveAll(flavors1);
         Cupcake cupcake = cupcakeRepository.findById(id).orElseThrow(() -> new ProductDoesntExist());
         cupcake.setName(name);
         cupcake.setDescription(description);

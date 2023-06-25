@@ -13,13 +13,6 @@ public class Flavor {
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
-//    @ManyToOne
-//    @JoinColumn(name="cake_id", nullable=true)
-//    private Cake cakes;
-//    @ManyToOne
-//    @JoinColumn(name="cake_id", nullable=true)
-//    private Cupcake cupcakes;
-
 
     public Flavor(String name) {
         this.name = name;

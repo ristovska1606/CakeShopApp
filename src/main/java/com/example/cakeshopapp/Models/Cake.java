@@ -18,7 +18,7 @@ public class Cake {
     private Long cake_id;
     private String name;
     private String description;
-    @OneToMany
+    @OneToMany (cascade = CascadeType.ALL)
     private List<Flavor> flavors;
     private int priceFor10Servings;
 

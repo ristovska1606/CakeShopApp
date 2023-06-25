@@ -1,5 +1,6 @@
 package com.example.cakeshopapp.Models;
 
+import com.example.cakeshopapp.Models.enums.Roles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,9 @@ public class User {
     @OneToMany (mappedBy ="user", fetch = FetchType.EAGER) //so ova kazuvame deka maprimae obratno do user svojtvoto vo shoppingcard
     private List<Cart> shoppingCarts;
 
+    @Enumerated(value = EnumType.STRING)
+    private Roles role;
+
     public User(String firstName, String lastName, String email, String password, String confirmPassword, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +35,7 @@ public class User {
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.phoneNumber = phoneNumber;
+        this.role = Roles.USER;
     }
 
     public User() {

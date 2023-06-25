@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CakeRepository extends JpaRepository<Cake, Long> {
+    Cake findByName(String name);
+    void deleteByName(String name);
 }
