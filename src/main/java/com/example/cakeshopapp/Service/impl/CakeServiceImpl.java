@@ -8,6 +8,7 @@ import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.CakeService;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class CakeServiceImpl implements CakeService {
 
 
     @Override
-    public Cake create(String name, String description, String flavors, int price) {
+    public Cake create(String name, String description, String flavors, int price,  String image) {
         if(cakeRepository.findByName(name) != null)
             {
                 this.flavorsRepository.deleteAll(this.cakeRepository.findByName(name).getFlavors());
@@ -33,12 +34,12 @@ public class CakeServiceImpl implements CakeService {
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
         List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).toList();
         this.flavorsRepository.saveAll(flavors1);
-        Cake cake = new Cake(name, description, flavors1, price);
+        Cake cake = new Cake(name, description, flavors1, price, image);
         return this.cakeRepository.save(cake);
     }
 
     @Override
-    public Cake edit(Long id, String name, String description, String flavors, int price) {
+    public Cake edit(Long id, String name, String description, String flavors, int price,  String image) {
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
         List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
         this.flavorsRepository.saveAll(flavors1);
@@ -47,6 +48,7 @@ public class CakeServiceImpl implements CakeService {
         cake.setDescription(description);
         cake.setFlavors(flavors1);
         cake.setPriceFor10Servings(price);
+        cake.setProductImage(image);
         return this.cakeRepository.save(cake);
     }
 

@@ -12,10 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class HomeController {
 
+    public static String UPLOAD_DIRECTORY = "src/main/resources/static/images/products/";
     private final CakeService cakeService;
     private final CupcakeService cupcakeService;
     public HomeController(CakeService cakeService, CupcakeService cupcakeService) {
@@ -40,14 +47,20 @@ public class HomeController {
     }
 
     @PostMapping("/addProduct")
-    public String register(@RequestParam String productName,
+    public String addProduct(@RequestParam String productName,
                            @RequestParam String productDescription,
+                           @RequestParam("productImage") MultipartFile file,
                            @RequestParam String flavors,
                            @RequestParam String price,
-                           @RequestParam String type) {
+                           @RequestParam String type) throws IOException {
+
+        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+        Files.write(fileNameAndPath, file.getBytes());
+        String productPath = "..\\..\\images\\products";
+        Path imagePath = Paths.get(productPath, file.getOriginalFilename());
 
         if(type.equals("CAKE"))
-            this.cakeService.create(productName, productDescription, flavors, Integer.parseInt(price));
+            this.cakeService.create(productName, productDescription, flavors, Integer.parseInt(price), String.valueOf(imagePath));
 
 
         if(type.equals("CUPCAKE"))
