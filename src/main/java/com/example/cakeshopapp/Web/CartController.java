@@ -2,6 +2,7 @@ package com.example.cakeshopapp.Web;
 
 import com.example.cakeshopapp.Models.Cake;
 import com.example.cakeshopapp.Models.Flavor;
+import com.example.cakeshopapp.Models.Product;
 import com.example.cakeshopapp.Models.User;
 import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.CakeService;
@@ -34,9 +35,9 @@ public class CartController {
                                    HttpServletRequest request){
         Cake cake = this.cakeService.findById(cakeId);
         Flavor cakeFlavor = this.flavorsRepository.findById(flavor).orElseThrow();
-        this.productService.create(cake.getName(), cakeFlavor.getName(), Integer.parseInt(serves), Integer.parseInt(serves)*cake.getPriceFor10Servings());
+        Product product = this.productService.create(cake.getName(), cakeFlavor.getName(), Integer.parseInt(serves), Integer.parseInt(serves)*cake.getPriceFor10Servings());
         User user = (User) request.getSession().getAttribute("user");
-        cartService.addProductToShoppingCart(user.getUser_id(), cakeId);
+        cartService.addProductToShoppingCart(user.getUser_id(), product.getProductId());
 
         if(cakeService.findById(cakeId) == null)
             return "redirect:/cupcakes";
