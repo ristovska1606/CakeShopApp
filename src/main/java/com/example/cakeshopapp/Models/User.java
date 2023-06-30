@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,7 @@ public class User {
     private String password;
     private String confirmPassword;
     private String phoneNumber;
+
     @OneToMany (mappedBy ="user", fetch = FetchType.EAGER) //so ova kazuvame deka maprimae obratno do user svojtvoto vo shoppingcard
     private List<Cart> shoppingCarts;
 
@@ -29,6 +31,7 @@ public class User {
     private Roles role;
 
     public User(String firstName, String lastName, String email, String password, String confirmPassword, String phoneNumber) {
+        this.shoppingCarts = new ArrayList<>();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

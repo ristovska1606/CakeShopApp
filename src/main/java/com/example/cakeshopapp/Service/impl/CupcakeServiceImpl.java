@@ -24,7 +24,7 @@ public class CupcakeServiceImpl implements CupcakeService {
 
 
     @Override
-    public Cupcake create(String name, String description, String flavors, int price) {
+    public Cupcake create(String name, String description, String flavors, int price, String image) {
         if(cupcakeRepository.findByName(name) != null)
         {
             this.flavorsRepository.deleteAll(this.cupcakeRepository.findByName(name).getFlavors());
@@ -33,12 +33,12 @@ public class CupcakeServiceImpl implements CupcakeService {
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
         List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).toList();
         this.flavorsRepository.saveAll(flavors1);
-        Cupcake cupcake = new Cupcake(name, description, flavors1, price);
+        Cupcake cupcake = new Cupcake(name, description, flavors1, price, image);
         return this.cupcakeRepository.save(cupcake);
     }
 
     @Override
-    public Cupcake edit(Long id, String name, String description, String flavors, int price) {
+    public Cupcake edit(Long id, String name, String description, String flavors, int price, String image) {
         List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
         List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
         this.flavorsRepository.saveAll(flavors1);
@@ -47,6 +47,7 @@ public class CupcakeServiceImpl implements CupcakeService {
         cupcake.setDescription(description);
         cupcake.setFlavors(flavors1);
         cupcake.setPriceFor10Servings(price);
+        cupcake.setProductImage(image);
         return this.cupcakeRepository.save(cupcake);
     }
 

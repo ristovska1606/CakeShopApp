@@ -1,0 +1,28 @@
+.card{
+    border-radius: 100px ;
+    background-color: rgba(217, 217, 217, 75%);
+    height: 650px;
+    max-width: 415px;
+}
+
+.card-img-top{
+    border-radius: 100px;
+    max-width:inherit;
+    min-height: 400px;
+    padding: 10px 15px 0px ;
+}
+
+.dropdown{
+    width: 200px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: #EDBBBA;
+    font-style: italic;
+}
+
+.addToCart{
+    background-color: #EDBBBA;
+    border-radius: 10px;
+    border-color: black;
+    font-weight: bold;
+}

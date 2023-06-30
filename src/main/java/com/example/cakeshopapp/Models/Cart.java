@@ -2,9 +2,7 @@ package com.example.cakeshopapp.Models;
 
 import com.example.cakeshopapp.Models.enums.CartStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ public class Cart {
     @ManyToOne
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
     @Enumerated(EnumType.STRING)

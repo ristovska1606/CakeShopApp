@@ -22,14 +22,9 @@ import java.nio.file.Paths;
 @Controller
 public class HomeController {
 
-    public static String UPLOAD_DIRECTORY = "src/main/resources/static/images/products/";
-    private final CakeService cakeService;
-    private final CupcakeService cupcakeService;
-    public HomeController(CakeService cakeService, CupcakeService cupcakeService) {
-        this.cakeService = cakeService;
-        this.cupcakeService = cupcakeService;
-    }
 
+    public HomeController() {
+    }
 
     @GetMapping({"/", "/welcome"})
     public String welcome() {;
@@ -39,35 +34,6 @@ public class HomeController {
     @GetMapping("/home")
     public String homePage() {;
         return "home.html";
-    }
-
-    @GetMapping("/addProduct")
-    public String addProductPage() {;
-        return "addProduct.html";
-    }
-
-    @PostMapping("/addProduct")
-    public String addProduct(@RequestParam String productName,
-                           @RequestParam String productDescription,
-                           @RequestParam("productImage") MultipartFile file,
-                           @RequestParam String flavors,
-                           @RequestParam String price,
-                           @RequestParam String type) throws IOException {
-
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        Files.write(fileNameAndPath, file.getBytes());
-        String productPath = "..\\..\\images\\products";
-        Path imagePath = Paths.get(productPath, file.getOriginalFilename());
-
-        if(type.equals("CAKE"))
-            this.cakeService.create(productName, productDescription, flavors, Integer.parseInt(price), String.valueOf(imagePath));
-
-
-        if(type.equals("CUPCAKE"))
-            this.cupcakeService.create(productName, productDescription, flavors, Integer.parseInt(price));
-
-        return "redirect:/home";
-
     }
 
 

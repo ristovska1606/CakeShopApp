@@ -10,4 +10,6 @@ public interface CartService {
 
     Cart getActiveShoppingCart(Long id);
     Cart addProductToShoppingCart(Long id, Long productId);
+
+    //boolean deleteProductFromCart(Long productId, Long cartId);
 }

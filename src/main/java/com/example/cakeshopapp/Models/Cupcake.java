@@ -19,12 +19,14 @@ public class Cupcake {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Flavor> flavors;
     private int priceFor10Servings;
+    private String productImage;
 
-    public Cupcake(String name, String description, List<Flavor> flavors, int priceFor10Servings) {
+    public Cupcake(String name, String description, List<Flavor> flavors, int priceFor10Servings, String productImage) {
         this.name = name;
         this.description = description;
         this.flavors = flavors;
         this.priceFor10Servings = priceFor10Servings;
+        this.productImage = productImage;
     }
 
     public Cupcake() {

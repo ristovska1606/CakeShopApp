@@ -15,16 +15,16 @@ public class Product {
     private int quantity;
     private int price;
 
+
     public Product() {
 
     }
+
     public Product(String productName, String flavor, int quantity, int price) {
         this.productName = productName;
         this.flavor = flavor;
-        this.quantity=quantity;
+        this.quantity = quantity;
         this.price = price;
 
     }
-
-
 }

@@ -1,9 +1,13 @@
 package com.example.cakeshopapp.Service.impl;
 
+import com.example.cakeshopapp.Models.Cart;
 import com.example.cakeshopapp.Models.Product;
+import com.example.cakeshopapp.Models.User;
 import com.example.cakeshopapp.Models.exceptions.OrderNotFoundException;
 import com.example.cakeshopapp.Repository.ProductRepository;
+import com.example.cakeshopapp.Service.CartService;
 import com.example.cakeshopapp.Service.ProductService;
+import com.example.cakeshopapp.Service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +15,13 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final UserService userService;
+    private final CartService cartService;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, UserService userService, CartService cartService) {
         this.productRepository = productRepository;
+        this.userService = userService;
+        this.cartService = cartService;
     }
 
 

@@ -62,5 +62,14 @@ public class CartServiceImpl implements CartService {
         shoppingCart.getProducts().add(product);
         return this.cartRepository.save(shoppingCart);
     }
+
+//    @Override
+//    public boolean deleteProductFromCart(Long productId, Long cartId) {
+//        Cart cart = this.cartRepository.findById(cartId).orElseThrow();
+//        List<Product> products = listAllProductsInShoppingCart(cartId);
+//        products = products.d
+//
+//
+//    }
 }
 
