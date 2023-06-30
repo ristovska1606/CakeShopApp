@@ -20,11 +20,13 @@ public class Cart {
     @ManyToOne
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
     @Enumerated(EnumType.STRING)
     private CartStatus status;
+
+    private int total;
 
     public Cart() {
     }
@@ -34,9 +36,10 @@ public class Cart {
         this.user = user;
         this.products = new ArrayList<>();
         this.status = CartStatus.CREATED;
+        this.total = 0;
     }
 
-
-
-
+    public void setTotal(int price) {
+        this.total += price;
+    }
 }

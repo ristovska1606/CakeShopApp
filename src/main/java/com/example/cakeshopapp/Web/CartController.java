@@ -1,6 +1,7 @@
 package com.example.cakeshopapp.Web;
 
 import com.example.cakeshopapp.Models.*;
+import com.example.cakeshopapp.Models.enums.CartStatus;
 import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,14 +75,28 @@ public class CartController {
         Cart cart = this.cartService.getActiveShoppingCart(user.getUser_id());
         List<Product> products = this.cartService.listAllProductsInShoppingCart(cart.getId());
         model.addAttribute("products", products);
+        model.addAttribute("total", cart.getTotal());
+        model.addAttribute("checkout", true);
 
         return "cart.html";
     }
 
-//    @PostMapping("/productsInCart/delete/{id}")
-//    public String deleteProductFromCart(@PathVariable Long id){
-//        this.cakeService.
-//        this.productService.delete(id);
-//        return "redirect:/cart";
-//    }
+    @PostMapping("/checkout")
+    public String checkOut(@RequestParam String cartNumber,
+                           @RequestParam String dateAndTime,
+                           @RequestParam String notes,
+                           HttpServletRequest request,
+                           Model model){
+
+        User user = (User) request.getSession().getAttribute("user");
+        Cart cart = this.cartService.getActiveShoppingCart(user.getUser_id());
+        cart.setStatus(CartStatus.FINISHED);
+        this.cartService.deleteAllProductFromCart(cart.getId());
+        model.addAttribute("checkout", true);
+        model.addAttribute("message", "Your order has been placed.");
+
+        return "redirect:/home";
+    }
+
+
 }

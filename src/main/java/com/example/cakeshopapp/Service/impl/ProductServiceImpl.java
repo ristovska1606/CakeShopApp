@@ -15,13 +15,10 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final UserService userService;
-    private final CartService cartService;
 
-    public ProductServiceImpl(ProductRepository productRepository, UserService userService, CartService cartService) {
+
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.userService = userService;
-        this.cartService = cartService;
     }
 
 
