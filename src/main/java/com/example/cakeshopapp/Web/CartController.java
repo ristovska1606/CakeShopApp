@@ -2,6 +2,7 @@ package com.example.cakeshopapp.Web;
 
 import com.example.cakeshopapp.Models.*;
 import com.example.cakeshopapp.Models.enums.CartStatus;
+import com.example.cakeshopapp.Models.exceptions.ProductDoesntExist;
 import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,14 +21,16 @@ public class CartController {
     private final CartService cartService;
     private final UserService userService;
     private final CupcakeService cupcakeService;
+    private final OrderService orderService;
 
-    public CartController(CakeService cakeService, ProductService productService, FlavorsRepository flavorsRepository, CartService cartService, UserService userService, CupcakeService cupcakeService) {
+    public CartController(CakeService cakeService, ProductService productService, FlavorsRepository flavorsRepository, CartService cartService, UserService userService, CupcakeService cupcakeService, OrderService orderService) {
         this.cakeService = cakeService;
         this.productService = productService;
         this.flavorsRepository = flavorsRepository;
         this.cartService = cartService;
         this.userService = userService;
         this.cupcakeService = cupcakeService;
+        this.orderService = orderService;
     }
 
     @PostMapping("/addProductToCart")
@@ -40,18 +43,15 @@ public class CartController {
         Flavor cakeFlavor = this.flavorsRepository.findById(flavor).orElseThrow();
         Product product = null;
 
-        if(cakeService.findById(productId) == null)
-            {
-                Cupcake productForCart = cupcakeService.findById(productId);
-                product = this.productService.create(productForCart.getName(),
-                        cakeFlavor.getName(),
-                        Integer.parseInt(serves),
-                        Integer.parseInt(serves)*productForCart.getPriceFor10Servings()
+        try{
+            Cupcake productForCart = cupcakeService.findById(productId);
+            product = this.productService.create(productForCart.getName(),
+                    cakeFlavor.getName(),
+                    Integer.parseInt(serves),
+                    Integer.parseInt(serves)*productForCart.getPriceFor10Servings()
 
-                );
-
-            }
-        else {
+            );
+        }catch (ProductDoesntExist e){
             Cake productForCart = cakeService.findById(productId);
             product = this.productService.create(productForCart.getName(),
                     cakeFlavor.getName(),
@@ -62,7 +62,7 @@ public class CartController {
 
         cartService.addProductToShoppingCart(user.getUser_id(), product.getProductId());
 
-        if(cakeService.findById(productId) == null)
+        if(cakeService.findByIdOptional(productId).isEmpty())
             return "redirect:/cupcakes";
         return "redirect:/cakes";
 
@@ -76,8 +76,6 @@ public class CartController {
         List<Product> products = this.cartService.listAllProductsInShoppingCart(cart.getId());
         model.addAttribute("products", products);
         model.addAttribute("total", cart.getTotal());
-        model.addAttribute("checkout", true);
-
         return "cart.html";
     }
 
@@ -91,12 +89,13 @@ public class CartController {
         User user = (User) request.getSession().getAttribute("user");
         Cart cart = this.cartService.getActiveShoppingCart(user.getUser_id());
         cart.setStatus(CartStatus.FINISHED);
-        this.cartService.deleteAllProductFromCart(cart.getId());
-        model.addAttribute("checkout", true);
-        model.addAttribute("message", "Your order has been placed.");
-
-        return "redirect:/home";
+        this.orderService.create(cart, cartNumber, dateAndTime, notes);
+        return "redirect:/successfulOrder";
     }
 
 
+    @GetMapping("/successfulOrder")
+    public String successfulOrderPage(){
+        return "successfulOrder.html";
+    }
 }

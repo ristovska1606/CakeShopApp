@@ -32,7 +32,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String homePage() {;
+    public String homePage() {
         return "home.html";
     }
 

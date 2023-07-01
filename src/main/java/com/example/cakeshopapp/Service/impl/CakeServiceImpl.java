@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CakeServiceImpl implements CakeService {
@@ -65,5 +66,10 @@ public class CakeServiceImpl implements CakeService {
     @Override
     public Cake findById(Long id) {
         return this.cakeRepository.findById(id).orElseThrow(() -> new ProductDoesntExist());
+    }
+
+    @Override
+    public Optional<Cake> findByIdOptional(Long id) {
+        return this.cakeRepository.findById(id);
     }
 }

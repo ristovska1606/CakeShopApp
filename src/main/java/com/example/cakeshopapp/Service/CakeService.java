@@ -4,6 +4,7 @@ import com.example.cakeshopapp.Models.Cake;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 public interface CakeService {
     Cake create(String name, String description,String flavors, int price,  String image);
@@ -11,4 +12,5 @@ public interface CakeService {
     void delete(Long id);
     List<Cake> listAll();
     Cake findById(Long id);
+    Optional<Cake> findByIdOptional(Long id);
 }

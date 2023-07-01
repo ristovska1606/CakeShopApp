@@ -61,46 +61,36 @@
                                 <td th:text="${product.getFlavor()}"></td>
                                 <td th:text="${product.getQuantity()}"></td>
                                 <td th:text="${product.getPrice()}"></td>
-<!--                                <td class="text-right">-->
-<!--                                    <th:block>-->
-<!--                                        <form th:method="post" th:action="@{'/productsInCart/delete/{id}' (id=${product.getProductId()})}">-->
-<!--                                            <button type="Submit" class="btn btn-sm btn-danger">-->
-<!--                                                <i class="fa fa-trash">Delete-->
-<!--                                                </i>-->
-<!--                                            </button>-->
-<!--                                        </form>-->
-<!--                                    </th:block>-->
-<!--                                </td>-->
-                            </tr>
-                            <tr style="border-top: black">
-                                <td class="text-right" th:text="${total}"> </td>
                             </tr>
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-end">
+                            Total: <th:block th:text="${total}"></th:block>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <form>
+            <div th:if="${products.size() > 0}" class="row">
+                <form th:method="post" th:action="@{'/checkout'}">
                 <div class="col-8 m-2" >
                    <label for="cartNumber" class="m-3 text-center" style="width: 150px;"> Cart number: </label>
-                   <input type="text" id="cartNumber" name="cartNumber" placeholder="123456789102368"  style="width: 300px;">
+                   <input type="text" required id="cartNumber" name="cartNumber" placeholder="123456789102368"  style="width: 300px;">
                 </div>
                 <div class="col-8 m-2">
                     <label for="dateAndTime" class="m-3 text-center" style="width: 150px;"> Date and time: </label>
-                    <input type="text" id="dateAndTime" name="dateAndTime" placeholder="25/03/2023 15:00" style="width: 300px;">
+                    <input type="text" required id="dateAndTime" name="dateAndTime" placeholder="25/03/2023 15:00" style="width: 300px;">
                 </div>
                 <div class="col-8 m-2">
                     <label for="notes" class="m-3 text-center" style="width: 150px;"> Notes: </label>
                     <input type="text" id="notes" name="notes"  style="width: 300px;">
                 </div>
                 <div class="col-12 d-flex justify-content-end" >
-                    <input type="submit" th:if="${checkout}==true" class="btn btn-success" id="checkOut" name="checkOut" value="Check out" style="width: 450px;">
-                    <input type="submit" th:if="${checkout}==false" class="btn btn-success" id="checkOut2" name="checkOut" value="Check out" style="width: 450px;" disabled="disabled">
+                    <input type="submit" class="btn btn-success" id="checkOut" name="checkOut" value="Check out" style="width: 450px;">
                 </div>
                 </form>
             </div>
+
         </section>
     </div>
 </section>

@@ -96,7 +96,7 @@
                   <option th:text="100" th:value="100"></option>
                 </select>
               </div>
-            <h5 class="d-flex justify-content-center">from $<th:block th:text="${cake.getPriceFor10Servings()}"></th:block> </h5>
+            <h5 class="d-flex justify-content-center">$<th:block th:text="${cake.getPriceFor10Servings()}"></th:block> for 10 serves</h5>
             <div class="d-flex justify-content-center">
               <input type="submit" class="btn addToCart" value="Add to cart">
             </div>

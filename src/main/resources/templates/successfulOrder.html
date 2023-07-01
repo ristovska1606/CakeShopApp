@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CakeShop - SUCCESSFUL ORDER</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="../../css/basic.css">
+    <link rel="stylesheet" href="../../css/cakesAndCupcakes.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    .mainHome{
+        background-color: rgba(217, 217, 217, 85%);
+        margin: 20px;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+</style>
+<body>
+
+<section>
+    <div class="container-fluid px-0">
+        <section class="mainHome py-5" style=" min-height: 85.7vh;">
+            <div class="row ">
+                <div class="col-12 d-flex justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
+                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                    </svg>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <h3 style="color: green"><th:block th:text="${session.user.getEmail()}"></th:block>, your order has been placed successfully! </h3>
+                </div>
+            </div>
+
+            <div class="p-4 m-4 d-flex justify-content-center">
+                <a class="btn border rounded btn-light btn-lg " style="width: 250px;" href="/home">Products</a>
+            </div>
+            <div class="p-4 m-4 d-flex justify-content-center" >
+                <a class="btn border rounded btn-light btn-lg " style="width: 250px;" href="/logout">Logout</a>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <div class="info ">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-center">
+                <h4>42 Queen St.La Porte, IN 46350</h4>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <h4>071 / 237 - 567</h4>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright -->
+    <div class="text-center p-2" style="background-color: rgba(255, 204, 234, 0.5);">
+        © Cake Shop 2023
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
+
+</body>
+</html>
