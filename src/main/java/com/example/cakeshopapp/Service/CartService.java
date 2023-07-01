@@ -13,4 +13,6 @@ public interface CartService {
 
     boolean deleteAllProductFromCart(Long cartId);
 
+    void markAsFinished(Long id);
+
 }

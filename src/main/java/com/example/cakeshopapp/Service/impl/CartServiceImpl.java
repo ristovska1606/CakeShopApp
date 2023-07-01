@@ -67,10 +67,17 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public boolean deleteAllProductFromCart(Long cartId) {
-        Cart cart = this.cartRepository.findById(cartId).orElseThrow();
+        Cart cart = this.cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException());
         cart.setProducts(null);
         productRepository.deleteAll(cart.getProducts());
         return true;
+    }
+
+    @Override
+    public void markAsFinished(Long id) {
+        Cart cart = this.cartRepository.findById(id).orElseThrow(() -> new CartNotFoundException());
+        cart.setStatus(CartStatus.FINISHED);
+        this.cartRepository.save(cart);
     }
 
 }

@@ -82,14 +82,15 @@ public class CartController {
     @PostMapping("/checkout")
     public String checkOut(@RequestParam String cartNumber,
                            @RequestParam String dateAndTime,
+                           @RequestParam String address,
                            @RequestParam String notes,
                            HttpServletRequest request,
                            Model model){
 
         User user = (User) request.getSession().getAttribute("user");
         Cart cart = this.cartService.getActiveShoppingCart(user.getUser_id());
-        cart.setStatus(CartStatus.FINISHED);
-        this.orderService.create(cart, cartNumber, dateAndTime, notes);
+        this.cartService.markAsFinished(cart.getId());
+        this.orderService.create(cart, cartNumber, dateAndTime,address, notes);
         return "redirect:/successfulOrder";
     }
 

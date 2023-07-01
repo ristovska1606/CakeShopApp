@@ -65,7 +65,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end">
-                            Total: <th:block th:text="${total}"></th:block>
+                            Total: <th:block th:text="${total}"></th:block>$
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,11 @@
                     <label for="dateAndTime" class="m-3 text-center" style="width: 150px;"> Date and time: </label>
                     <input type="text" required id="dateAndTime" name="dateAndTime" placeholder="25/03/2023 15:00" style="width: 300px;">
                 </div>
+                    <div class="col-8 m-2">
+                        <label for="address" class="m-3 text-center" style="width: 150px;"> Address: </label>
+                        <input type="text" id="address" name="address"  style="width: 300px;" required placeholder="64 Wentworth Street
+Sun City, AZ 85351">
+                    </div>
                 <div class="col-8 m-2">
                     <label for="notes" class="m-3 text-center" style="width: 150px;"> Notes: </label>
                     <input type="text" id="notes" name="notes"  style="width: 300px;">

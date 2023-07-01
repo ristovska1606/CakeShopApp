@@ -18,16 +18,18 @@ public class Order{
 
     private String cartNumber;
     private String dateAndTime;
+    private String address;
     private String note;
 
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 
-    public Order(Cart cart, String cartNumber, String dateAndTime, String note) {
+    public Order(Cart cart, String cartNumber, String dateAndTime, String address, String note) {
         this.cart = cart;
         this.cartNumber = cartNumber;
         this.dateAndTime = dateAndTime;
         this.note = note;
+        this.address=address;
         this.status = OrderStatus.IN_PROGRESS;
     }
 

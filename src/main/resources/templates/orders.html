@@ -18,8 +18,13 @@
         padding: 10px;
     }
 
-    thead, tbody{
-        border-bottom: black;
+    .orderBox{
+        margin: 10px;
+        padding: 5px;
+        border-radius: 20px;
+        border: black solid 2px;
+        background-color: #D9D9D9;
+
     }
 </style>
 <body>
@@ -27,13 +32,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="btn btn-light border rounded m-2">
         <a class="nav-link" href="/home">Back</a>
-    </div>
-
-    <div class="navbar-nav ms-auto ">
-        <h5 class="m-2" th:text="${session.user.getEmail()}" style="color: #EDBBBA; padding-top: 15px;"></h5>
-        <div class="btn btn-light border rounded m-2">
-            <a class="nav-link" href="/logout">Logout</a>
-        </div>
     </div>
 </nav>
 
@@ -44,53 +42,48 @@
                 <div class="col-12 d-flex justify-content-center " th:if="${orders.size() <= 0}">
                     <h3 class="font-italic"> You have 0 orders left! </h3>
                 </div>
-                <div class="col-12" th:if="${orderes.size() > 0}">
-                    <div class="table-responsive">
-                        <table class="table" th:each="order : ${orders}">
-                            <h5 th:text="${order.getOrder_Id()}"></h5>
-                            <thead>
-                            <tr>
-                                <th scope="col">Product name</th>
-                                <th scope="col">Flavor</th>
-                                <th scope="col">Serves</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="product : ${orders.getCart().getProducts()}" class="product">
-                                <td th:text="${product.getProductName()}"></td>
-                                <td th:text="${product.getFlavor()}"></td>
-                                <td th:text="${product.getQuantity()}"></td>
-                                <td th:text="${product.getPrice()}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="d-flex justify-content-end">
-                            Total: <th:block th:text="${total}"></th:block>
+                <div class="col-12" th:if="${orders.size() > 0}">
+                    <div class="orderBox" th:each="order : ${orders}">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Product name</th>
+                                    <th scope="col">Flavor</th>
+                                    <th scope="col">Serves</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="product : ${order.getCart().getProducts()}" class="product">
+                                    <td th:text="${product.getProductName()}"></td>
+                                    <td th:text="${product.getFlavor()}"></td>
+                                    <td th:text="${product.getQuantity()}"></td>
+                                    <td th:text="${product.getPrice()}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5> <i style="font-weight: normal">Order id:</i> <th:block th:text="${order.getOrder_id()}"></th:block> - $<th:block th:text="${order.getCart().getTotal()}"></th:block></h5>
+                                <div>
+                                    <p class="m-1" th:text="${order.getDateAndTime()}"></p>
+                                    <p class="m-1" th:text="${order.getAddress()}"></p>
+                                    <p class="m-1" th:text="${order.getNote()}"></p>
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <form th:method="POST" th:action="@{'/orders/markAsFinished/{id}' (id=${order.getOrder_id()})}" class="d-flex align-items-end">
+                                    <button type="Submit" class="btn btn-sm btn-success">
+                                        <i class="fa fa-trash"> Mark as finished </i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <div th:if="${products.size() > 0}" class="row">
-                <form th:method="post" th:action="@{'/checkout'}">
-                    <div class="col-8 m-2" >
-                        <label for="cartNumber" class="m-3 text-center" style="width: 150px;"> Cart number: </label>
-                        <input type="text" required id="cartNumber" name="cartNumber" placeholder="123456789102368"  style="width: 300px;">
-                    </div>
-                    <div class="col-8 m-2">
-                        <label for="dateAndTime" class="m-3 text-center" style="width: 150px;"> Date and time: </label>
-                        <input type="text" required id="dateAndTime" name="dateAndTime" placeholder="25/03/2023 15:00" style="width: 300px;">
-                    </div>
-                    <div class="col-8 m-2">
-                        <label for="notes" class="m-3 text-center" style="width: 150px;"> Notes: </label>
-                        <input type="text" id="notes" name="notes"  style="width: 300px;">
-                    </div>
-                    <div class="col-12 d-flex justify-content-end" >
-                        <input type="submit" class="btn btn-success" id="checkOut" name="checkOut" value="Check out" style="width: 450px;">
-                    </div>
-                </form>
-            </div>
 
         </section>
     </div>
