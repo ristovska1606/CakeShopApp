@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Cake Shop - HOME</title>
@@ -34,10 +34,10 @@
             <div class="p-4 m-4">
               <a class="btn border rounded btn-light btn-lg" style="width: 250px;" href="/cupcakes">Cupcakes</a>
             </div>
-            <div class="p-4 m-4 w-4">
+            <div th:if="${session.user.getRole()=='ADMIN'}" class="p-4 m-4 w-4">
               <a class="btn border rounded btn-light btn-lg" style="width: 250px;" href="/addProduct">Add new product</a>
             </div>
-            <div class="p-4 m-4 w-4">
+            <div th:if="${session.user.getRole()=='ADMIN'}" class="p-4 m-4 w-4">
               <a class="btn border rounded btn-light btn-lg" style="width: 250px;" href="/orders">Orders</a>
             </div>
           </div>
