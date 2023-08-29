@@ -27,7 +27,7 @@ public class ProductsController {
 
 
     @GetMapping("/addProduct")
-    public String addProductPage() {;
+    public String addProductPage() {
         return "addProduct.html";
     }
 

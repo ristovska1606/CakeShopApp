@@ -24,6 +24,8 @@ public class HomeController {
     @GetMapping("/home")
     public String homePage( HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
+        if(user == null)
+            return "welcomePage.html";
         String role = user.getRole().name();
         model.addAttribute("role", role);
         return "home.html";

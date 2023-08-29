@@ -72,4 +72,9 @@ public class CakeServiceImpl implements CakeService {
     public Optional<Cake> findByIdOptional(Long id) {
         return this.cakeRepository.findById(id);
     }
+
+    @Override
+    public Optional<Cake> findByName(String name) {
+        return Optional.ofNullable(this.cakeRepository.findByName(name));
+    }
 }

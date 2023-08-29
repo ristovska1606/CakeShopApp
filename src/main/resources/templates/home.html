@@ -12,6 +12,8 @@
   <div class="container-fluid px-0">
     <div class="row g-0" style=" min-height: 95.8vh;">
 
+
+
       <!-- First column -->
       <div class="col-lg-6">
         <div class="btn btn-light border rounded m-2">
@@ -28,6 +30,9 @@
       <div class="col-lg-6">
         <div class="px-5 pt-5 d-flex align-items-center" style=" min-height: 86.8vh;">
           <div class="container" >
+            <div class="p-4 m-4" th:if="${session.hasMessage}">
+              <h3 class="italic" style="color: lawngreen; width: 400px;"> Product added to cart! </h3>
+            </div>
             <div class="p-4 m-4">
               <a class="btn border rounded btn-light btn-lg" style="width: 250px;" href="/cakes">Cakes</a>
             </div>

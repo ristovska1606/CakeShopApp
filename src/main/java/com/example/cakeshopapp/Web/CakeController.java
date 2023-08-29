@@ -22,7 +22,6 @@ public class CakeController {
     public String getCakesPage(Model model){
         List<Cake> cakes = this.cakeService.listAll();
         model.addAttribute("cakes", cakes);
-        Cake cake = cakes.get(0);
         return "cakes.html";
     }
 

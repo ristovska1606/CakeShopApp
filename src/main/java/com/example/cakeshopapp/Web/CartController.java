@@ -62,9 +62,9 @@ public class CartController {
 
         cartService.addProductToShoppingCart(user.getUser_id(), product.getProductId());
 
-        if(cakeService.findByIdOptional(productId).isEmpty())
-            return "redirect:/cupcakes";
-        return "redirect:/cakes";
+        request.getSession().setAttribute("hasMessage", "true");
+
+        return "redirect:/home";
 
     }
 

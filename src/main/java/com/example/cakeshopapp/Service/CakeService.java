@@ -13,4 +13,5 @@ public interface CakeService {
     List<Cake> listAll();
     Cake findById(Long id);
     Optional<Cake> findByIdOptional(Long id);
+    Optional<Cake> findByName(String name);
 }
