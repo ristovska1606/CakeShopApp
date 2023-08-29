@@ -5,7 +5,7 @@ import com.example.cakeshopapp.Models.enums.CartStatus;
 import com.example.cakeshopapp.Models.exceptions.ProductDoesntExist;
 import com.example.cakeshopapp.Repository.FlavorsRepository;
 import com.example.cakeshopapp.Service.*;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

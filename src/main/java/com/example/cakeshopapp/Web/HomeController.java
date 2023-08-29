@@ -2,7 +2,7 @@ package com.example.cakeshopapp.Web;
 
 import com.example.cakeshopapp.Models.User;
 import com.example.cakeshopapp.Service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
