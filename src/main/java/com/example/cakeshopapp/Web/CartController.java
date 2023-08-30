@@ -40,7 +40,7 @@ public class CartController {
                                    HttpServletRequest request){
 
         User user = (User) request.getSession().getAttribute("user");
-        Flavor cakeFlavor = this.flavorsRepository.findById(flavor).orElseThrow(() -> new RuntimeException());
+        Flavor cakeFlavor = this.flavorsRepository.findById(flavor).orElseThrow(()-> new RuntimeException());
         Product product = null;
 
         try{
