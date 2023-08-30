@@ -14,7 +14,7 @@
     <name>CakeShopApp</name>
     <description>CakeShopApp</description>
     <properties>
-        <java.version>11.0.16.1</java.version>
+        <java.version>19</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -102,7 +102,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.7</version>
                 <configuration>
-                    <jdkVersion>1.8</jdkVersion>
+                    <jdkVersion>19</jdkVersion>
                 </configuration>
             </plugin>
             <plugin>
