@@ -1,6 +1,6 @@
 package com.example.cakeshopapp.Models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data

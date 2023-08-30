@@ -1,7 +1,7 @@
 package com.example.cakeshopapp.Models;
 
 import com.example.cakeshopapp.Models.enums.Roles;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
