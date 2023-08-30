@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CupcakeServiceImpl implements CupcakeService {
@@ -30,8 +31,8 @@ public class CupcakeServiceImpl implements CupcakeService {
             this.flavorsRepository.deleteAll(this.cupcakeRepository.findByName(name).getFlavors());
             this.cupcakeRepository.delete(cupcakeRepository.findByName(name));
         }
-        List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
-        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).toList();
+        List<String> flavorsList = Arrays.stream(flavors.split(",")).collect(Collectors.toList());
+        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).collect(Collectors.toList());
         this.flavorsRepository.saveAll(flavors1);
         Cupcake cupcake = new Cupcake(name, description, flavors1, price, image);
         return this.cupcakeRepository.save(cupcake);
@@ -39,8 +40,8 @@ public class CupcakeServiceImpl implements CupcakeService {
 
     @Override
     public Cupcake edit(Long id, String name, String description, String flavors, int price, String image) {
-        List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
-        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
+        List<String> flavorsList = Arrays.stream(flavors.split(",")).collect(Collectors.toList());
+        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).collect(Collectors.toList());
         this.flavorsRepository.saveAll(flavors1);
         Cupcake cupcake = cupcakeRepository.findById(id).orElseThrow(() -> new ProductDoesntExist());
         cupcake.setName(name);

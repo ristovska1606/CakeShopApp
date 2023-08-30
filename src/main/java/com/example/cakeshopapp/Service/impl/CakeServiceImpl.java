@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CakeServiceImpl implements CakeService {
@@ -32,8 +33,8 @@ public class CakeServiceImpl implements CakeService {
                 this.flavorsRepository.deleteAll(this.cakeRepository.findByName(name).getFlavors());
                 this.cakeRepository.delete(cakeRepository.findByName(name));
             }
-        List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
-        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).toList();
+        List<String> flavorsList = Arrays.stream(flavors.split(",")).collect(Collectors.toList());
+        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f.trim())).collect(Collectors.toList());
         this.flavorsRepository.saveAll(flavors1);
         Cake cake = new Cake(name, description, flavors1, price, image);
         return this.cakeRepository.save(cake);
@@ -41,8 +42,8 @@ public class CakeServiceImpl implements CakeService {
 
     @Override
     public Cake edit(Long id, String name, String description, String flavors, int price,  String image) {
-        List<String> flavorsList = Arrays.stream(flavors.split(",")).toList();
-        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).toList();
+        List<String> flavorsList = Arrays.stream(flavors.split(",")).collect(Collectors.toList());
+        List<Flavor> flavors1 = flavorsList.stream().map(f -> new Flavor(f)).collect(Collectors.toList());
         this.flavorsRepository.saveAll(flavors1);
         Cake cake = cakeRepository.findById(id).orElseThrow(() -> new ProductDoesntExist());
         cake.setName(name);
