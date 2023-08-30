@@ -119,6 +119,7 @@
                 <configuration>
                     <source>19</source>
                     <target>19</target>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>
