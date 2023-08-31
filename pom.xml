@@ -11,10 +11,12 @@
     <groupId>com.example</groupId>
     <artifactId>CakeShopApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>CakeShopApp</name>
     <description>CakeShopApp</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
+
     </properties>
     <dependencies>
         <dependency>
