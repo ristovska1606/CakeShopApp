@@ -10,8 +10,6 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>CakeShopApp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>CakeShopApp</name>
     <description>CakeShopApp</description>
     <properties>
