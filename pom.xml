@@ -75,6 +75,16 @@
             <artifactId>surefire-junit-platform</artifactId>
             <version>3.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jcache</groupId>
+            <artifactId>jcache</artifactId>
+            <version>1.0-dev-2</version>
+        </dependency>
 
 
     </dependencies>
