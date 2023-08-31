@@ -1,7 +1,7 @@
 package com.example.cakeshopapp.Models;
 
 import com.example.cakeshopapp.Models.enums.OrderStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
