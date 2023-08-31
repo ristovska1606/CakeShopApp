@@ -83,20 +83,16 @@
             </plugin>
 
             <plugin>
-                <artifactId/>
-                <groupid>org.apache.maven.plugins</groupid>
-                <artifactid>maven-compiler-plugin</artifactid>
-                <version>3.8.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
                     <fork>false</fork>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>utf-8</encoding>
-                    <compilerargs>
-                        <arg>-parameters</arg>
-                    </compilerargs>
                     <release>${java.version}</release>
-                    <forcejavaccompileruse>true</forcejavaccompileruse>
+
                 </configuration>
                 <executions>
                     <!-- replacing default-compile as it is treated specially by maven -->
@@ -104,7 +100,7 @@
                         <id>default-compile</id>
                         <phase>none</phase>
                     </execution>
-                    <!-- replacing default-testcompile as it is treated specially by maven -->
+                    <!-- eplacing default-testcompile as it is treated specially by maven -->
                     <execution>
                         <id>default-testcompile</id>
                         <phase>none</phase>
@@ -116,13 +112,7 @@
                             <goal>compile</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>java-test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testcompile</goal>
-                        </goals>
-                    </execution>
+
                 </executions>
             </plugin>
         </plugins>
