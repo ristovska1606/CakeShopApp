@@ -82,14 +82,62 @@
 
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <groupid>org.apache.maven.plugins</groupid>
+                <artifactid>maven-compiler-plugin</artifactid>
+                <version>3.7.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                     <verbose>true</verbose>
                 </configuration>
+            </plugin>
+            Matteo Baldi 5198
+
+            SCORE:-5
+
+            this configuration worked for me, for java 11. (intellij version 2019.1) java.version is 11, declared in the properties part of the pom.xml. maven version should be 3.6 or higher.
+
+            <plugin>
+                <groupid>org.apache.maven.plugins</groupid>
+                <artifactid>maven-compiler-plugin</artifactid>
+                <version>3.8.0</version>
+                <configuration>
+                    <fork>false</fork>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>utf-8</encoding>
+                    <compilerargs>
+                        <arg>-parameters</arg>
+                    </compilerargs>
+                    <release>${java.version}</release>
+                    <forcejavaccompileruse>true</forcejavaccompileruse>
+                </configuration>
+                <executions>
+                    <!-- replacing default-compile as it is treated specially by maven -->
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <!-- replacing default-testcompile as it is treated specially by maven -->
+                    <execution>
+                        <id>default-testcompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>java-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>java-test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testcompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
