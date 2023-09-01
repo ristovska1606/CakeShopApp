@@ -18,17 +18,17 @@ public class HomeController {
 
     @GetMapping({"/", "/welcome"})
     public String welcome() {;
-        return "welcomePage.html";
+        return "welcomePage";
     }
 
     @GetMapping("/home")
     public String homePage( HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if(user == null)
-            return "welcomePage.html";
+            return "welcomePage";
         String role = user.getRole().name();
         model.addAttribute("role", role);
-        return "home.html";
+        return "home";
     }
 
 
