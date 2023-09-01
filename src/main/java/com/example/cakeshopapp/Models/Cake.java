@@ -1,10 +1,11 @@
 package com.example.cakeshopapp.Models;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Cake {
     private Long cake_id;
     private String name;
     private String description;
-    @OneToMany (orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Flavor> flavors;
     private int priceFor10Servings;
 

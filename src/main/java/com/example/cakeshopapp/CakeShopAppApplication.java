@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ServletComponentScan
 @EntityScan("com.example.cakeshopapp")
-@EnableJpaRepositories("com.example.cakeshopapp")
+@EnableJpaRepositories
 @Configuration
 public class CakeShopAppApplication {
 
