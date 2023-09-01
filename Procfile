@@ -1,1 +1,1 @@
-web: java server.port=9090 $JAVA_OPTS -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+web: java -cp target/classes/:target/dependency/* v1.a1.server
