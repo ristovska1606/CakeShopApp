@@ -1,1 +1,1 @@
-web: java -cp target/classes/:target/dependency/* com.example.cakeshopapp.CakeShopApplication
+web: java -cp target/classes/;target/dependency/* com.example.cakeshopapp.CakeShopApplication
